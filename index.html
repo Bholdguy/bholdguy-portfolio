@@ -137,7 +137,8 @@
   }
   .eyebrow::before{
     content:'';
-    width:24px;height:1px;
+    width:6px;height:6px;
+    border-radius:50%;
     background:var(--mint);
     display:inline-block;
   }
@@ -382,23 +383,38 @@
     font-size:0.9rem;
   }
 
-  /* ===== PROOF / DEAL LOG ===== */
+  /* ===== PROOF / DEAL LOG (horizontal scroll) ===== */
   .deal-log{
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
+    display:flex;
     gap:18px;
+    overflow-x:auto;
+    padding-bottom:12px;
+    scroll-snap-type:x mandatory;
+    -webkit-overflow-scrolling:touch;
+    scrollbar-width:thin;
+    scrollbar-color:var(--line) transparent;
   }
-  @media (max-width:880px){
-    .deal-log{grid-template-columns:repeat(2,1fr);}
+  .deal-log::-webkit-scrollbar{
+    height:6px;
   }
-  @media (max-width:560px){
-    .deal-log{grid-template-columns:1fr;}
+  .deal-log::-webkit-scrollbar-track{
+    background:transparent;
+  }
+  .deal-log::-webkit-scrollbar-thumb{
+    background:var(--line);
+    border-radius:10px;
   }
   .deal-item{
+    flex:0 0 auto;
+    width:260px;
+    scroll-snap-align:start;
     background:var(--panel);
     border:1px solid var(--line);
     border-radius:12px;
     overflow:hidden;
+  }
+  @media (max-width:560px){
+    .deal-item{width:78vw;}
   }
   .deal-item .frame{
     aspect-ratio:4/5;
@@ -423,8 +439,22 @@
     font-size:0.82rem;
     margin-bottom:4px;
   }
-  .deal-item.wide{
-    grid-column:span 1;
+  .scroll-hint{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    font-family:var(--mono);
+    font-size:0.74rem;
+    color:var(--muted);
+    margin-top:14px;
+  }
+  .scroll-hint .arrow{
+    color:var(--mint);
+    animation:nudge 1.6s ease-in-out infinite;
+  }
+  @keyframes nudge{
+    0%,100%{transform:translateX(0);}
+    50%{transform:translateX(5px);}
   }
 
   /* ===== CONTACT ===== */
@@ -621,7 +651,7 @@
     <div class="section-head">
       <div class="eyebrow">Receipts</div>
       <h2>Proof of work</h2>
-      <p>Real deal-room conversations &mdash; sourcing partnerships, structuring incentives, and getting confirmation that deals closed.</p>
+      <p>Real deal-room conversations from sourcing partnerships, structuring incentives, and confirming deals closed.</p>
     </div>
     <div class="deal-log">
       <div class="deal-item">
@@ -660,13 +690,14 @@
         </div>
       </div>
     </div>
+    <div class="scroll-hint">Scroll for more <span class="arrow">→</span></div>
   </div>
 </section>
 
 <section class="contact" id="contact">
   <div class="wrap">
-    <h2>Let's get your token listed and your pools funded.</h2>
-    <p class="lead">Open for BD and growth partnerships with exchanges, DEXs, and Web3 projects looking to build market depth.</p>
+    <h2>Have a BD problem? Let's solve it.</h2>
+    <p class="lead">Open to BD roles, advisory, and growth partnerships with exchanges, protocols, and Web3 teams that need someone who can open doors and close deals.</p>
     <div class="terminal">
       <div class="head"><span></span><span></span><span></span></div>
       <div class="line"><span class="prompt">$</span>telegram: <a href="https://t.me/Crypth_valid" target="_blank" rel="noopener">@Crypth_valid</a></div>
